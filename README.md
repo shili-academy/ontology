@@ -1,9 +1,20 @@
 # Ontology
 
+## Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-Window
+
+## Run app for Window
+
+```bash
 python app.py
+```
 
-Linux
+## Run app for Linux
+
+```bash
 python3 app.py
+```
