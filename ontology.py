@@ -1,7 +1,7 @@
 from rdflib import Graph, RDF, URIRef, Namespace, OWL
 
 # Tạo Namespace
-EX = Namespace("http://example.org/")
+EX = Namespace("http://localhost/ontologies/")
 
 # Tạo đồ thị RDF
 g = Graph()

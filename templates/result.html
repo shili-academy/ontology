@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommendation Result</title>
-</head>
-<body>
-    <h1>Learning Path for {{ role }}</h1>
-    <ul>
-        {% for course in learning_path %}
-            <li>{{ course.split('/')[-1] }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/">Go Back</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Recommendation Result - Course Recommendation System{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Learning Path for {{ role }}</h1>
+<ul class="list-group">
+  {% for course in learning_path %}
+  <li class="list-group-item">{{ course.split('/')[-1] }}</li>
+  {% endfor %}
+</ul>
+<div class="text-center mt-4">
+  <a href="/" class="btn btn-secondary">Go Back</a>
+</div>
+{% endblock %}

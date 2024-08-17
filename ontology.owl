@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ns1="http://localhost/ontologies/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://localhost/ontologies/SoftwareArchitecture">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/SeniorDeveloper">
+    <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
+    <ns1:requiresSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/AdvancedPython"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/SoftwareArchitecture"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/Course">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/teachesSkill">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/AdvancedPython">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:teachesSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/Skill">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/PythonProgramming">
+    <rdf:type rdf:resource="http://localhost/ontologies/Skill"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/Role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/JuniorDeveloper">
+    <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/hasCourse">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/requiresSkill">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+</rdf:RDF>
