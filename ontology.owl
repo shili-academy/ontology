@@ -3,8 +3,52 @@
    xmlns:ns1="http://localhost/ontologies/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
+  <rdf:Description rdf:about="http://localhost/ontologies/MachineLearning">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:teachesSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
+    <ns1:courseImage>https://example.com/images/machine_learning.jpg</ns1:courseImage>
+    <ns1:courseLink>https://example.com/courses/machine-learning</ns1:courseLink>
+    <ns1:courseDescription>An introduction to machine learning concepts and techniques.</ns1:courseDescription>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/DataScientist">
+    <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
+    <ns1:requiresSkill rdf:resource="http://localhost/ontologies/MachineLearning"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/MachineLearning"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/DeepLearning"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/Skill">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/SoftwareArchitecture">
     <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:courseImage>https://www.questpond.com/qp-img/76/pic_76.jpg</ns1:courseImage>
+    <ns1:courseLink>https://www.udemy.com/courses/search/?src=ukw&amp;q=software-architecture</ns1:courseLink>
+    <ns1:courseDescription>Learn the principles of software architecture and design patterns.</ns1:courseDescription>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/teachesSkill">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/FrontendDeveloper">
+    <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
+    <ns1:requiresSkill rdf:resource="http://localhost/ontologies/HtmlCssJs"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/ReactDevelopment"/>
+    <ns1:hasCourse rdf:resource="http://localhost/ontologies/HtmlCssJs"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/DeepLearning">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:teachesSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
+    <ns1:courseImage>https://example.com/images/deep_learning.jpg</ns1:courseImage>
+    <ns1:courseLink>https://example.com/courses/deep-learning</ns1:courseLink>
+    <ns1:courseDescription>Explore deep learning techniques and neural networks.</ns1:courseDescription>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/HtmlCssJs">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:courseImage>https://example.com/images/html_css_js.jpg</ns1:courseImage>
+    <ns1:courseLink>https://example.com/courses/html-css-js</ns1:courseLink>
+    <ns1:courseDescription>Master the basics of web development with HTML, CSS, and JavaScript.</ns1:courseDescription>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/courseLink">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/SeniorDeveloper">
     <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
@@ -12,32 +56,43 @@
     <ns1:hasCourse rdf:resource="http://localhost/ontologies/AdvancedPython"/>
     <ns1:hasCourse rdf:resource="http://localhost/ontologies/SoftwareArchitecture"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/ontologies/Course">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/ontologies/teachesSkill">
-    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/AdvancedPython">
     <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
     <ns1:teachesSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/ontologies/Skill">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <ns1:courseImage>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS68XRM9pZTYOrjS9WvI4Kusz38p7qYu4EHMg&amp;s</ns1:courseImage>
+    <ns1:courseLink>https://www.udemy.com/course/advanced-python-programming</ns1:courseLink>
+    <ns1:courseDescription>This course covers advanced topics in Python programming.</ns1:courseDescription>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/PythonProgramming">
     <rdf:type rdf:resource="http://localhost/ontologies/Skill"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/ontologies/Role">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  <rdf:Description rdf:about="http://localhost/ontologies/ReactDevelopment">
+    <rdf:type rdf:resource="http://localhost/ontologies/Course"/>
+    <ns1:teachesSkill rdf:resource="http://localhost/ontologies/HtmlCssJs"/>
+    <ns1:courseImage>https://example.com/images/react_development.jpg</ns1:courseImage>
+    <ns1:courseLink>https://example.com/courses/react-development</ns1:courseLink>
+    <ns1:courseDescription>Learn how to build dynamic web applications with React.</ns1:courseDescription>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/JuniorDeveloper">
     <rdf:type rdf:resource="http://localhost/ontologies/Role"/>
+    <ns1:requiresSkill rdf:resource="http://localhost/ontologies/PythonProgramming"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://localhost/ontologies/hasCourse">
+  <rdf:Description rdf:about="http://localhost/ontologies/Course">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/courseDescription">
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://localhost/ontologies/requiresSkill">
     <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/courseImage">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/hasCourse">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost/ontologies/Role">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
 </rdf:RDF>
