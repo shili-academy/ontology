@@ -23,6 +23,7 @@ teachesSkill = URIRef(EX.teachesSkill)
 courseImage = URIRef(EX.courseImage)
 courseLink = URIRef(EX.courseLink)
 courseDescription = URIRef(EX.courseDescription)
+courseName = URIRef(EX.courseName)
 currentPosition = URIRef(EX.currentPosition)
 targetPosition = URIRef(EX.targetPosition)
 
@@ -32,6 +33,7 @@ g.add((teachesSkill, RDF.type, RDF.Property))
 g.add((courseImage, RDF.type, RDF.Property))
 g.add((courseLink, RDF.type, RDF.Property))
 g.add((courseDescription, RDF.type, RDF.Property))
+g.add((courseName, RDF.type, RDF.Property))
 g.add((currentPosition, RDF.type, RDF.Property))
 g.add((targetPosition, RDF.type, RDF.Property))
 
@@ -70,8 +72,10 @@ for course in data['courses']:
     g.add((course_uri, courseImage, Literal(course['course_image'])))
     g.add((course_uri, courseLink, Literal(course['course_link'])))
     g.add((course_uri, courseDescription, Literal(course['course_description'])))
+    g.add((course_uri, courseName, Literal(course['course_name'])))
 
 # Lưu ontology vào file
 g.serialize("ontology.owl", format="xml")
 
 print("Ontology saved to ontology.owl")
+

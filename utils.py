@@ -20,10 +20,12 @@ def backward_chaining(graph, current_role, target_role, EX):
     for skill in target_skills:
         if skill not in current_skills:
             for course in graph.subjects(EX.teachesSkill, skill):
+                course_name = graph.value(course, EX.courseName)
                 image = graph.value(course, EX.courseImage)
                 link = graph.value(course, EX.courseLink)
                 description = graph.value(course, EX.courseDescription)
                 learning_path.append({
+                    "course_name": course_name,
                     "course": course,
                     "image": image,
                     "link": link,
