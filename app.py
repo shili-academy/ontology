@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template
 from rdflib import Graph, URIRef, Namespace
-from utils import backward_chaining 
+from utils import backward_chaining, get_roles
 
 # Tạo Namespace và tải Ontology
 EX = Namespace("http://localhost/ontologies/")
@@ -11,18 +11,20 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        target_role = request.form['role']
-        target_role_uri = URIRef(EX[target_role])
-        learning_path = backward_chaining(g, target_role_uri, EX)
-        
-        if learning_path is None:
-            error_message = "Không tìm thấy kết quả phù hợp cho vai trò này."
-            return render_template('index.html', error=error_message)
-        
-        return render_template('result.html', role=target_role, learning_path=learning_path)
+    roles = get_roles(g, EX)
+    courses = None
+    error = None
     
-    return render_template('index.html')
+    if request.method == 'POST':
+        current_position = URIRef(EX[request.form['current_position'].strip().replace(" ", "_")])
+        target_position = URIRef(EX[request.form['target_position'].strip().replace(" ", "_")])
+        
+        courses = backward_chaining(g, current_position, target_position, EX)
+        
+        if not courses:
+            error = "Không tìm thấy lộ trình học tập phù hợp."
+    
+    return render_template('index.html', roles=roles, courses=courses, error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)

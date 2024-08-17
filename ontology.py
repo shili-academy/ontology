@@ -1,3 +1,4 @@
+import json
 from rdflib import Graph, RDF, URIRef, Namespace, OWL, Literal
 
 # Tạo Namespace
@@ -21,7 +22,9 @@ hasCourse = URIRef(EX.hasCourse)
 teachesSkill = URIRef(EX.teachesSkill)
 courseImage = URIRef(EX.courseImage)
 courseLink = URIRef(EX.courseLink)
-courseDescription = URIRef(EX.courseDescription)  # Thêm thuộc tính mô tả
+courseDescription = URIRef(EX.courseDescription)
+currentPosition = URIRef(EX.currentPosition)
+targetPosition = URIRef(EX.targetPosition)
 
 g.add((requiresSkill, RDF.type, RDF.Property))
 g.add((hasCourse, RDF.type, RDF.Property))
@@ -29,76 +32,44 @@ g.add((teachesSkill, RDF.type, RDF.Property))
 g.add((courseImage, RDF.type, RDF.Property))
 g.add((courseLink, RDF.type, RDF.Property))
 g.add((courseDescription, RDF.type, RDF.Property))
+g.add((currentPosition, RDF.type, RDF.Property))
+g.add((targetPosition, RDF.type, RDF.Property))
 
-# Thêm các cá thể (individuals)
-senior_developer = URIRef(EX.SeniorDeveloper)
-junior_developer = URIRef(EX.JuniorDeveloper)
-data_scientist = URIRef(EX.DataScientist)
-frontend_developer = URIRef(EX.FrontendDeveloper)
+# Đọc dữ liệu từ tệp JSON
+with open('courses.json', 'r') as f:
+    data = json.load(f)
 
-python_programming = URIRef(EX.PythonProgramming)
-advanced_python = URIRef(EX.AdvancedPython)
-software_architecture = URIRef(EX.SoftwareArchitecture)
-machine_learning = URIRef(EX.MachineLearning)
-deep_learning = URIRef(EX.DeepLearning)
-react_development = URIRef(EX.ReactDevelopment)
-html_css_js = URIRef(EX.HtmlCssJs)
+# Thêm vai trò và kỹ năng
+for role in data['roles']:
+    role_uri = URIRef(EX[role['role_name'].replace(" ", "_")])
+    g.add((role_uri, RDF.type, Role))
+    
+    # Thêm thông tin về vị trí hiện tại và mục tiêu
+    current_position_uri = URIRef(EX[role['current_position'].replace(" ", "_")])
+    target_position_uri = URIRef(EX[role['target_position'].replace(" ", "_")])
+    
+    g.add((role_uri, currentPosition, current_position_uri))
+    g.add((role_uri, targetPosition, target_position_uri))
+    
+    for skill in role['skills']:
+        skill_uri = URIRef(EX[skill.replace(" ", "_")])
+        g.add((skill_uri, RDF.type, Skill))
+        g.add((role_uri, requiresSkill, skill_uri))
 
-g.add((senior_developer, RDF.type, Role))
-g.add((junior_developer, RDF.type, Role))
-g.add((data_scientist, RDF.type, Role))
-g.add((frontend_developer, RDF.type, Role))
-
-g.add((python_programming, RDF.type, Skill))
-g.add((advanced_python, RDF.type, Course))
-g.add((software_architecture, RDF.type, Course))
-g.add((machine_learning, RDF.type, Course))
-g.add((deep_learning, RDF.type, Course))
-g.add((react_development, RDF.type, Course))
-g.add((html_css_js, RDF.type, Course))
-
-# Liên kết các cá thể (associations between individuals)
-g.add((senior_developer, requiresSkill, python_programming))
-g.add((junior_developer, requiresSkill, python_programming))
-g.add((data_scientist, requiresSkill, machine_learning))
-g.add((frontend_developer, requiresSkill, html_css_js))
-
-g.add((advanced_python, teachesSkill, python_programming))
-g.add((machine_learning, teachesSkill, python_programming))
-g.add((deep_learning, teachesSkill, python_programming))
-g.add((react_development, teachesSkill, html_css_js))
-
-g.add((senior_developer, hasCourse, advanced_python))
-g.add((senior_developer, hasCourse, software_architecture))
-g.add((data_scientist, hasCourse, machine_learning))
-g.add((data_scientist, hasCourse, deep_learning))
-g.add((frontend_developer, hasCourse, react_development))
-g.add((frontend_developer, hasCourse, html_css_js))
-
-# Thêm thông tin hình ảnh, liên kết và mô tả cho các khóa học
-g.add((advanced_python, courseImage, Literal("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS68XRM9pZTYOrjS9WvI4Kusz38p7qYu4EHMg&s")))
-g.add((advanced_python, courseLink, Literal("https://www.udemy.com/course/advanced-python-programming")))
-g.add((advanced_python, courseDescription, Literal("This course covers advanced topics in Python programming.")))
-
-g.add((software_architecture, courseImage, Literal("https://www.questpond.com/qp-img/76/pic_76.jpg")))
-g.add((software_architecture, courseLink, Literal("https://www.udemy.com/courses/search/?src=ukw&q=software-architecture")))
-g.add((software_architecture, courseDescription, Literal("Learn the principles of software architecture and design patterns.")))
-
-g.add((machine_learning, courseImage, Literal("https://example.com/images/machine_learning.jpg")))
-g.add((machine_learning, courseLink, Literal("https://example.com/courses/machine-learning")))
-g.add((machine_learning, courseDescription, Literal("An introduction to machine learning concepts and techniques.")))
-
-g.add((deep_learning, courseImage, Literal("https://example.com/images/deep_learning.jpg")))
-g.add((deep_learning, courseLink, Literal("https://example.com/courses/deep-learning")))
-g.add((deep_learning, courseDescription, Literal("Explore deep learning techniques and neural networks.")))
-
-g.add((react_development, courseImage, Literal("https://example.com/images/react_development.jpg")))
-g.add((react_development, courseLink, Literal("https://example.com/courses/react-development")))
-g.add((react_development, courseDescription, Literal("Learn how to build dynamic web applications with React.")))
-
-g.add((html_css_js, courseImage, Literal("https://example.com/images/html_css_js.jpg")))
-g.add((html_css_js, courseLink, Literal("https://example.com/courses/html-css-js")))
-g.add((html_css_js, courseDescription, Literal("Master the basics of web development with HTML, CSS, and JavaScript.")))
+# Thêm các khóa học
+for course in data['courses']:
+    course_uri = URIRef(EX[course['course_name'].replace(" ", "_")])
+    skill_uri = URIRef(EX[course['skill_taught'].replace(" ", "_")])
+    
+    # Thêm khóa học và kỹ năng liên quan
+    g.add((course_uri, RDF.type, Course))
+    g.add((skill_uri, RDF.type, Skill))
+    g.add((course_uri, teachesSkill, skill_uri))
+    
+    # Thêm thông tin khóa học
+    g.add((course_uri, courseImage, Literal(course['course_image'])))
+    g.add((course_uri, courseLink, Literal(course['course_link'])))
+    g.add((course_uri, courseDescription, Literal(course['course_description'])))
 
 # Lưu ontology vào file
 g.serialize("ontology.owl", format="xml")
